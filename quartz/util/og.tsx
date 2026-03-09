@@ -109,7 +109,18 @@ export async function fetchTtf(
   }
 
   // fontData is an ArrayBuffer containing the .ttf file data
-  const fontResponse = await fetch(match[1])
+  let fontResponse: Response
+  try {
+    fontResponse = await fetch(match[1])
+  } catch (error) {
+    console.log(
+      styleText(
+        "yellow",
+        `\nWarning: Failed to fetch font file for ${rawFontName} weight ${weight}: ${error}`,
+      ),
+    )
+    return
+  }
   const fontData = Buffer.from(await fontResponse.arrayBuffer())
   await fs.mkdir(cacheDir, { recursive: true })
   await fs.writeFile(cachePath, fontData)
