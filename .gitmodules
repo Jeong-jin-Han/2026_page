@@ -1,3 +1,3 @@
 [submodule "content"]
 	path = content
-	url = git@github.com:Jeong-jin-Han/2026_vault.git
+	url = https://github.com/Jeong-jin-Han/2026_vault.git
